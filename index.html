@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latest Code Fetcher</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background-color: #f6f7f8;
+      color: #333;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: none;
+      background-color: #007acc;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    #result {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Fetch Latest 6‑Digit Code</h1>
+  <p>Click the button below to retrieve the most recent 6‑digit code from your configured inbox.</p>
+  <button id="fetch">Get Code</button>
+  <div id="result"></div>
+
+  <script>
+    const btn = document.getElementById('fetch');
+    const result = document.getElementById('result');
+
+    btn.addEventListener('click', async () => {
+      btn.disabled = true;
+      result.textContent = 'Fetching...';
+      try {
+        const res = await fetch('/.netlify/functions/get-latest-code');
+        const data = await res.json();
+        if (res.ok) {
+          result.textContent = 'Latest code: ' + data.code;
+        } else {
+          result.textContent = 'Error: ' + (data.error || 'Unknown error');
+        }
+      } catch (err) {
+        result.textContent = 'Error: ' + err.message;
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
