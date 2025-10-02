@@ -1,0 +1,9 @@
+## Netlify build configuration
+
+[build]
+  # Directory containing Netlify Functions
+  functions = "netlify/functions"
+  # The publish directory (where index.html lives) is the root of this project
+  publish = "."
+
+## Optional configuration for preview/deploy environment variables can go here
