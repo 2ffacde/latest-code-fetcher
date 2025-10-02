@@ -1,0 +1,13 @@
+{
+  "name": "latest-code-fetcher",
+  "version": "1.0.0",
+  "description": "Netlify function and frontend to fetch the latest 6‑digit code from an IMAP inbox.",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server ."
+  },
+  "dependencies": {
+    "imap-simple": "^5.0.0",
+    "mailparser": "^3.3.0"
+  }
+}
